@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+  <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
+  <title>Edit an Hero</title>
+</head>
+<body>
+<div th:insert="header.html :: navbar"></div>
+<main class="container">
+  <div class="my-3 row">
+    <div class="col-10 offset-1 p-3 rounded bg-dark text-light">
+      <h1>Edit an Hero</h1>
+      <hr>
+      <form th:action="@{/heroes/edit/{id}(id=${hero.id})}" th:object="${hero}" method="post">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nom: </label>
+          <input type="text" th:field="*{name}" class="form-control" id="name" required>
+          <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+        <div class="mb-3">
+          <label for="city" class="form-label">Ville: </label>
+          <select th:field="*{city}"  id="city">
+            <option th:each="city : ${cities}" th:value="${city.getId()}" th:text="${city.getNom()}">
+            </option>
+          </select>
+          <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Téléphone: </label>
+          <input type="text" th:field="*{phone}" class="form-control" id="phone" required>
+          <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+        </div>
+        <div class="mb-3">
+          <label for="longitude" class="form-label">Longitude: </label>
+          <input type="text" th:field="*{longitude}" class="form-control" id="longitude" required>
+          <span th:if="${#fields.hasErrors('longitude')}" th:errors="*{longitude}"></span>
+        </div>
+        <div class="mb-3">
+          <label for="latitude" class="form-label">Latitude: </label>
+          <input type="text" th:field="*{latitude}" class="form-control" id="latitude" required>
+          <span th:if="${#fields.hasErrors('latitude')}" th:errors="*{latitude}"></span>
+        </div>
+        <label for="incident1" class="form-label">Premier incident: </label>
+        <select th:field="*{incident1}" id="incident1">
+          <option th:each="incident : ${T(com.cesi.heroes.domain.EIncident).values()}"
+                  th:value="${T(com.cesi.heroes.domain.EIncident).values()[(incident.id)]}" th:text="${incident.nom}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('incident1')}" th:errors="*{incident1}"></span>
+        <label for="incident2" class="form-label">Deuxième incident: </label>
+        <select th:field="*{incident2}" id="incident2">
+          <option th:each="incident : ${T(com.cesi.heroes.domain.EIncident).values()}"
+                  th:value="${T(com.cesi.heroes.domain.EIncident).values()[(incident.id)]}" th:text="${incident.nom}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('incident2')}" th:errors="*{incident2}"></span>
+        <label for="incident3" class="form-label">Troisième incident: </label>
+        <select th:field="*{incident3}" id="incident3">
+          <option th:each="incident : ${T(com.cesi.heroes.domain.EIncident).values()}"
+                  th:value="${T(com.cesi.heroes.domain.EIncident).values()[(incident.id)]}" th:text="${incident.nom}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('incident3')}" th:errors="*{incident3}"></span>
+        <div class="text-end">
+          <button class="btn btn-warning">Edit Hero</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+</body>
+</html>

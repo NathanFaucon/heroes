@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+  <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
+  <title>Add an Incident</title>
+</head>
+<body>
+<div th:insert="header.html :: navbar"></div>
+<main class="container">
+  <div class="my-3 row">
+    <div class="col-10 offset-1 p-3 rounded bg-dark text-light">
+      <h1>Add an Incident</h1>
+      <hr>
+      <form th:action="@{/incidents/create}" th:object="${incident}" method="post">
+        <label for="type" class="form-label">Type d'incident: </label>
+        <select th:field="*{type}" id="type">
+          <option th:each="incident : ${T(com.cesi.heroes.domain.EIncident).values()}"
+                  th:value="${T(com.cesi.heroes.domain.EIncident).values()[(incident.id)]}" th:text="${incident.nom}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
+        <div class="mb-3">
+          <label for="city" class="form-label">Ville: </label>
+          <select th:field="*{city}"  id="city">
+            <option th:each="city : ${cities}" th:value="${city.getId()}" th:text="${city.getNom()}">
+            </option>
+          </select>
+          <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+        </div>
+        <div class="mb-3">
+          <label for="longitude" class="form-label">Longitude: </label>
+          <input type="text" th:field="*{longitude}" class="form-control" id="longitude" required>
+          <span th:if="${#fields.hasErrors('longitude')}" th:errors="*{longitude}"></span>
+        </div>
+        <div class="mb-3">
+          <label for="latitude" class="form-label">Latitude: </label>
+          <input type="text" th:field="*{latitude}" class="form-control" id="latitude" required>
+          <span th:if="${#fields.hasErrors('latitude')}" th:errors="*{latitude}"></span>
+        </div>
+        <div class="text-end">
+          <button class="btn btn-success">Add Incident</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+  <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
+  <title>Add a City</title>
+</head>
+<body>
+<div th:insert="header.html :: navbar"></div>
+<main class="container">
+  <div class="my-3 row">
+    <div class="col-10 offset-1 p-3 rounded bg-dark text-light">
+      <h1>Add a City</h1>
+      <hr>
+      <form th:action="@{/cities/create}" th:object="${city}" method="post">
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom: </label>
+          <input type="text" th:field="*{nom}" class="form-control" id="nom" required>
+          <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+        </div>
+        <div class="text-end">
+          <button class="btn btn-success">Add city</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+</body>
+</html>

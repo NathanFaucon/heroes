@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NavigationBar</title>
+
+</head>
+<body>
+
+<nav th:fragment="navbar" class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li><a class="nav-link" th:href="@{/heroes}">Héros</a></li>
+
+            <li><a class="nav-link" th:href="@{/cities}">Villes</a></li>
+
+            <li><a class="nav-link" th:href="@{/incidents}">Incidents</a></li>
+        </ul>
+    </div>
+</nav>
+
+</body>
+</html>
